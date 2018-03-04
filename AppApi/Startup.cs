@@ -1,29 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Reflection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+using AutoMapper;
+using Services.Mappings;
 
 namespace AppApi
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public IHostingEnvironment Environment { get; set; }
+        public Startup(IHostingEnvironment env)
         {
-            Configuration = configuration;
+            Environment = env;
+            Configuration = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", true, true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true)
+                .AddEnvironmentVariables()
+                .AddUserSecrets<Startup>()
+                .Build();
         }
 
-        public IConfiguration Configuration { get; }
+        public IConfigurationRoot Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddAutoMapper(typeof(TargetMapperServices).GetTypeInfo().Assembly);
+            services.DependencyInjectionRegistration(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
