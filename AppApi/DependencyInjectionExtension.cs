@@ -3,12 +3,14 @@ using Microsoft.Extensions.DependencyInjection;
 using Services;
 using Services.Contracts;
 using Services.Options;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace AppApi
 {
     public static class DependencyInjectionExtension
     {
-        public static IServiceCollection DependencyInjectionRegistration(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection DependencyInjectionRegistration(this IServiceCollection services,
+            IConfiguration configuration)
         {
             services.AddTransient<IPersonalityService, PersonalityService>();
             services.AddTransient<ITonalityService, TonalityService>();
@@ -18,5 +20,15 @@ namespace AppApi
 
             return services;
         }
-    }
+
+        public static IServiceCollection AddSwagger(this IServiceCollection services)
+        {
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
+            });
+
+            return services;
+        }
+}
 }

@@ -5,6 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Reference Include="Microsoft.Bot.Builder">
+      <HintPath>..\packages\Microsoft.Bot.Builder.3.14.0.7\lib\net46\Microsoft.Bot.Builder.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="ResourceMessages.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>

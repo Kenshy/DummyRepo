@@ -2,12 +2,10 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
-using BotApp1.Dialogs;
-using BotApp1.Models;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
 
-namespace BotApp1
+namespace Bot_Application1
 {
     [BotAuthentication]
     public class MessagesController : ApiController
@@ -20,7 +18,7 @@ namespace BotApp1
         {
             if (activity.Type == ActivityTypes.Message)
             {
-                await Conversation.SendAsync(activity, MakeLuisDialog);
+                await Conversation.SendAsync(activity, () => new Dialogs.RootDialog());
             }
             else
             {
@@ -28,11 +26,6 @@ namespace BotApp1
             }
             var response = Request.CreateResponse(HttpStatusCode.OK);
             return response;
-        }
-
-        private IDialog<InterviewModel> MakeLuisDialog()
-        {
-            return Chain.From(() => new LuisDialog(UserModel.BuildForm, InterviewModel.BuildForm));
         }
 
         private Activity HandleSystemMessage(Activity message)

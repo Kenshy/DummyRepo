@@ -31,6 +31,7 @@ namespace AppApi
             services.AddMvc();
             services.AddAutoMapper(typeof(TargetMapperServices).GetTypeInfo().Assembly);
             services.DependencyInjectionRegistration(Configuration);
+            services.AddSwagger();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,6 +41,12 @@ namespace AppApi
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Sentiment");
+            });
 
             app.UseMvc();
         }
