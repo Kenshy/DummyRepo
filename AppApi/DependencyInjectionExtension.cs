@@ -14,6 +14,7 @@ namespace AppApi
         {
             services.AddTransient<IPersonalityService, PersonalityService>();
             services.AddTransient<ITonalityService, TonalityService>();
+            services.AddTransient<IInterviewService, InterviewService>();
 
             services.Configure<PersonalityOption>(configuration.GetSection("Personality"));
             services.Configure<TonalityOption>(configuration.GetSection("Tonality"));

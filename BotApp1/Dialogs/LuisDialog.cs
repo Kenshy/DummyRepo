@@ -6,7 +6,6 @@ using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.FormFlow;
 using Microsoft.Bot.Builder.Luis;
 using Microsoft.Bot.Builder.Luis.Models;
-using Microsoft.Bot.Connector;
 
 namespace BotApp1.Dialogs
 {
@@ -34,34 +33,40 @@ namespace BotApp1.Dialogs
         public async Task Greeting(IDialogContext context, LuisResult result)
         {
             await context.PostAsync("Hello! I will be your guide today.");
-            //var userModel = new UserModel();
+            var userModel = new UserModel();
             if (result.TryFindEntity("CandidateName", out EntityRecommendation candidate))
             {
-                context.SetProperty<string>("Name", candidate.Entity);
-                context.Call(new GreetingDialog(candidate.Entity), Callback);
+                userModel.Name = candidate.Entity;
             }
             else
             {
-                await context.PostAsync("Please tell me your name.");
-                context.Wait(NameReceived);
+                if (context.GetProperty<string>(nameof(userModel.Name), out var name))
+                    userModel.Name = name;
             }
-        }
 
-        private async Task NameReceived(IDialogContext context, IAwaitable<object> result)
-        {
-            var response = await result as IMessageActivity;
-            context.SetProperty<string>("Name", response?.Text ?? "guest");
-            context.Call(new GreetingDialog(), Callback);
+            var hasMail = context.GetProperty<string>(nameof(userModel.Email), out var email);
+            if (hasMail)
+                userModel.Email = email;
+
+            var registrationForm = new FormDialog<UserModel>(userModel, _userModel, FormOptions.PromptInStart);
+            context.Call(registrationForm, GreetingCallback);
         }
 
         [LuisIntent("Interview")]
         private async Task StartInterview(IDialogContext context, LuisResult result)
         {
+            //if(result)
             var interviewForm =
                 new FormDialog<InterviewModel>(new InterviewModel(), _interviewModel, FormOptions.PromptInStart);
             context.Call<InterviewModel>(interviewForm, Callback);
         }
 
+        private async Task GreetingCallback(IDialogContext context, IAwaitable<UserModel> result)
+        {
+            var userData = await result;
+            await context.PostAsync($"Great job, {userData.Name}! What can I do for you? Check for some interviews, offer you an interview with a specific company?");
+            context.Wait(MessageReceived);
+        }
 
         private async Task Callback(IDialogContext context, IAwaitable<object> result)
         {
