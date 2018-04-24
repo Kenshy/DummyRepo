@@ -30,6 +30,7 @@ namespace AppApi.Controllers
             var toneAnalysis = _tonalityService.AnalyzeTone(text);
             return Ok(toneAnalysis);
         }
+
         [SwaggerResponse((int)HttpStatusCode.OK, typeof(UtteranceAnalyses))]
         [SwaggerOperation(Tags = new []{"Sentiment"})]
         [HttpPost("chat")]
@@ -38,6 +39,7 @@ namespace AppApi.Controllers
             var chatResponse = _tonalityService.AnalyzeChat(chat);
             return Ok(chatResponse);
         }
+
         [SwaggerOperation(Tags = new[] { "Personality" })]
         [SwaggerResponse((int)HttpStatusCode.OK, typeof(ProfileDto))]
         [HttpPost("personality")]

@@ -18,6 +18,7 @@ namespace BotApp1.Models
         }
 
         [Prompt("Nice to meet you, {Name}! We would need your email to forward results of your interview step.\nPlease note that using an invalid email will make you unreachable to recruiters.")]
+        [Pattern(@"^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$")]
         public string Email { get; set; }
 
         public static IForm<UserModel> BuildForm()

@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Services.Contracts;
 using Services.Data;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace AppApi.Controllers
 {
@@ -16,10 +18,12 @@ namespace AppApi.Controllers
             _interviewService = interviewService;
         }
 
+        [SwaggerOperation(Tags = new[] { "Interview" })]
+        [SwaggerResponse((int)HttpStatusCode.OK, typeof(List<CompanyDto>))]
         [HttpGet("companies")]
-        public async Task<List<CompanyDto>> GetCompanies()
+        public async Task<IActionResult> GetCompanies()
         {
-            return new List<CompanyDto>
+            return Ok(new List<CompanyDto>
             {
                 new CompanyDto
                 {
@@ -33,13 +37,25 @@ namespace AppApi.Controllers
                     CompanyName = "Company2",
                     ShortName = "c2"
                 }
-            };
+            });
         }
 
+        [SwaggerOperation(Tags = new[] { "Interview" })]
+        [SwaggerResponse((int)HttpStatusCode.OK, typeof(QuestionResponse))]
         [HttpPost("question")]
-        public async Task<QuestionResponse> GetQuestion([FromBody]QuestionRequest question)
+        public async Task<IActionResult> GetQuestion([FromBody]QuestionRequest question)
         {
-            return await _interviewService.GetQuestion(question);
+            var response = await _interviewService.GetQuestion(question);
+            return Ok(response);
+        }
+
+        [SwaggerOperation(Tags = new[] {"Interview"})]
+        [SwaggerResponse((int) HttpStatusCode.OK)]
+        [HttpPost("personality/analysis")]
+        public async Task<IActionResult> GetAnalysis([FromBody]InterviewModelRequest request)
+        {
+            await _interviewService.AnalyzeAnswers(request);
+            return Accepted();
         }
     }
 
