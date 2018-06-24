@@ -4,24 +4,27 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using AutoMapper;
+using Data;
 using Services.Mappings;
+using Microsoft.EntityFrameworkCore;
 
 namespace AppApi
 {
     public class Startup
     {
         public IHostingEnvironment Environment { get; set; }
-public Startup(IHostingEnvironment env)
-{
-    Environment = env;
-    Configuration = new ConfigurationBuilder()
-        .SetBasePath(env.ContentRootPath)
-        .AddJsonFile("appsettings.json", true, true)
-        .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true)
-        .AddEnvironmentVariables()
-        .AddUserSecrets<Startup>()
-        .Build();
-}
+
+        public Startup(IHostingEnvironment env)
+        {
+            Environment = env;
+            Configuration = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", true, true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true)
+                .AddEnvironmentVariables()
+                .AddUserSecrets<Startup>()
+                .Build();
+        }
 
         public IConfigurationRoot Configuration { get; }
 
@@ -29,6 +32,8 @@ public Startup(IHostingEnvironment env)
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            var connection = @"Server=(localdb)\mssqllocaldb;Database=localhost;Trusted_Connection=True;ConnectRetryCount=0";
+            services.AddDbContext<TraitContext>(options => options.UseSqlServer(connection));
             services.AddAutoMapper(typeof(TargetMapperServices).GetTypeInfo().Assembly);
             services.DependencyInjectionRegistration(Configuration);
             services.AddSwagger();
