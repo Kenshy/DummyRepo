@@ -43,10 +43,10 @@ namespace BotApp1.Services.Contracts
             var data = new InterviewModelDto();
             data.CompanyName = state.CompanyName;
             data.Q1 = state.Q1;
-            //data.Q2= state.Q2;
-            //data.Q3 = state.Q3;
+            data.Q2 = state.Q2;
+            data.Q3 = state.Q3;
 
-            //data.Q4 = state.Q4;
+            data.Q4 = state.Q4;
             //data.Q5 = state.Q5;
             //data.Q6 = state.Q6;
 

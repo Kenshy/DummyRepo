@@ -11,17 +11,17 @@ namespace AppApi
     public class Startup
     {
         public IHostingEnvironment Environment { get; set; }
-        public Startup(IHostingEnvironment env)
-        {
-            Environment = env;
-            Configuration = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", true, true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true)
-                .AddEnvironmentVariables()
-                .AddUserSecrets<Startup>()
-                .Build();
-        }
+public Startup(IHostingEnvironment env)
+{
+    Environment = env;
+    Configuration = new ConfigurationBuilder()
+        .SetBasePath(env.ContentRootPath)
+        .AddJsonFile("appsettings.json", true, true)
+        .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true)
+        .AddEnvironmentVariables()
+        .AddUserSecrets<Startup>()
+        .Build();
+}
 
         public IConfigurationRoot Configuration { get; }
 

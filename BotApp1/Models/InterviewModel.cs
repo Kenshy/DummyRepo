@@ -30,8 +30,8 @@ namespace BotApp1.Models
 
         private static async Task Process(IDialogContext context, InterviewModel state)
         {
-            var hasName = context.UserData.TryGetValue<string>("Name", out var name);
-            var hasEmail = context.UserData.TryGetValue<string>("Email", out var email);
+var hasName = context.UserData.TryGetValue<string>("Name", out var name);
+var hasEmail = context.UserData.TryGetValue<string>("Email", out var email);
 
             if(hasEmail)
                 await ProcessUser(state, hasName ? name: "guest", email);

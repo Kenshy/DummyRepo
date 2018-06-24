@@ -16,24 +16,24 @@ namespace BotApp1
         /// POST: api/Messages
         /// Receive a message from a user and reply to it
         /// </summary>
-        public async Task<HttpResponseMessage> Post([FromBody]Activity activity)
-        {
-            if (activity.Type == ActivityTypes.Message)
-            {
-                await Conversation.SendAsync(activity, MakeLuisDialog);
-            }
-            else
-            {
-                HandleSystemMessage(activity);
-            }
-            var response = Request.CreateResponse(HttpStatusCode.OK);
-            return response;
-        }
+public async Task<HttpResponseMessage> Post([FromBody]Activity activity)
+{
+    if (activity.Type == ActivityTypes.Message)
+    {
+        await Conversation.SendAsync(activity, MakeLuisDialog);
+    }
+    else
+    {
+        HandleSystemMessage(activity);
+    }
+    var response = Request.CreateResponse(HttpStatusCode.OK);
+    return response;
+}
 
-        private IDialog<InterviewModel> MakeLuisDialog()
-        {
-            return Chain.From(() => new LuisDialog(UserModel.BuildForm, InterviewModel.BuildForm));
-        }
+private IDialog<InterviewModel> MakeLuisDialog()
+{
+    return Chain.From(() => new LuisDialog(UserModel.BuildForm, InterviewModel.BuildForm));
+}
 
         private Activity HandleSystemMessage(Activity message)
         {

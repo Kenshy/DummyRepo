@@ -11,17 +11,35 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="InterpersonalResource.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>InterpersonalResource.resx</DependentUpon>
+    </Compile>
     <Compile Update="ResourceMessages.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>ResourceMessages.resx</DependentUpon>
     </Compile>
+    <Compile Update="PersonalMessages.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>PersonalMessages.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="InterpersonalResource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>InterpersonalResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="ResourceMessages.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ResourceMessages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="PersonalMessages.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PersonalMessages.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 
