@@ -4,9 +4,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using AutoMapper;
-using Data;
 using Services.Mappings;
 using Microsoft.EntityFrameworkCore;
+using Data1;
 
 namespace AppApi
 {
@@ -32,8 +32,10 @@ namespace AppApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            var connection = @"Server=(localdb)\mssqllocaldb;Database=localhost;Trusted_Connection=True;ConnectRetryCount=0";
-            services.AddDbContext<TraitContext>(options => options.UseSqlServer(connection));
+            var connection
+                = //@"Server=(localdb)\mssqllocaldb;Database=localhost;Trusted_Connection=True;ConnectRetryCount=0";
+                "Server=localhost;Database=PersonalityPrj;Trusted_Connection=True;";
+            services.AddDbContext<PersonalityContext>(options => options.UseSqlServer(connection));
             services.AddAutoMapper(typeof(TargetMapperServices).GetTypeInfo().Assembly);
             services.DependencyInjectionRegistration(Configuration);
             services.AddSwagger();

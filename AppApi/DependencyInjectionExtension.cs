@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Data1.Contracts;
+using Data1.Services;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Services;
 using Services.Contracts;
@@ -12,9 +14,16 @@ namespace AppApi
         public static IServiceCollection DependencyInjectionRegistration(this IServiceCollection services,
             IConfiguration configuration)
         {
+            #region Services
             services.AddTransient<IPersonalityService, PersonalityService>();
             services.AddTransient<ITonalityService, TonalityService>();
             services.AddTransient<IInterviewService, InterviewService>();
+            #endregion
+
+            #region Data
+
+            services.AddTransient<ITraitData, TraitData>();
+            #endregion
 
             services.Configure<PersonalityOption>(configuration.GetSection("Personality"));
             services.Configure<TonalityOption>(configuration.GetSection("Tonality"));
