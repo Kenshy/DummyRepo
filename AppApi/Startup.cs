@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using AppApi.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -54,6 +55,11 @@ namespace AppApi
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Sentiment");
             });
+
+            //using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            //{
+            //    serviceScope.ServiceProvider.GetService<PersonalityContext>().EnsureSeed();
+            //}
 
             app.UseMvc();
         }

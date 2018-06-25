@@ -1,4 +1,6 @@
-﻿namespace Data1.Contracts
+﻿using System.Threading.Tasks;
+
+namespace Data1.Contracts
 {
     public interface ITraitData
     {

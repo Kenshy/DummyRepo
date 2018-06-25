@@ -1,4 +1,5 @@
-﻿using Data1.Contracts;
+﻿using AppApi.Extensions.DataSeed;
+using Data1.Contracts;
 using Data1.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -7,7 +8,7 @@ using Services.Contracts;
 using Services.Options;
 using Swashbuckle.AspNetCore.Swagger;
 
-namespace AppApi
+namespace AppApi.Extensions
 {
     public static class DependencyInjectionExtension
     {
@@ -18,6 +19,7 @@ namespace AppApi
             services.AddTransient<IPersonalityService, PersonalityService>();
             services.AddTransient<ITonalityService, TonalityService>();
             services.AddTransient<IInterviewService, InterviewService>();
+            services.AddTransient<IDataInitializer, DataInitializer>();
             #endregion
 
             #region Data
