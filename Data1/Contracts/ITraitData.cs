@@ -1,9 +1,12 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Data1.Dtos;
 
 namespace Data1.Contracts
 {
     public interface ITraitData
     {
-        int GetData();
+        Task<List<TraitDto>> GetTraits();
+        Task<ParagraphDto> GetParagraphs(ParagraphType paragraphType);
     }
 }

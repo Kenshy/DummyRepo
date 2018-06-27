@@ -33,9 +33,7 @@ namespace AppApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            var connection
-                = //@"Server=(localdb)\mssqllocaldb;Database=localhost;Trusted_Connection=True;ConnectRetryCount=0";
-                "Server=localhost;Database=PersonalityPrj;Trusted_Connection=True;";
+            var connection = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<PersonalityContext>(options => options.UseSqlServer(connection));
             services.AddAutoMapper(typeof(TargetMapperServices).GetTypeInfo().Assembly);
             services.DependencyInjectionRegistration(Configuration);
