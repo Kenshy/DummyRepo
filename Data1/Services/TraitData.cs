@@ -27,5 +27,11 @@ namespace Data1.Services
             return await _context.Paragraphs.Where(x => x.TypeId == paragraphType).ProjectTo<ParagraphDto>()
                 .FirstOrDefaultAsync();
         }
+
+        public async Task<string> GetTraitText(string id, decimal value)
+        {
+            return await _context.Traits.Where(x => x.Id == id && x.MinVal <= value && x.MaxVal >= value)
+                .Select(x => x.Text).FirstOrDefaultAsync();
+        }
     }
 }

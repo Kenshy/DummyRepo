@@ -174,7 +174,6 @@ namespace Data1.DataSeed
                     MaxVal = 80,
                     Text = ""
                 },
-
                 new TraitEntity
                 {
                     Id = "need_stability",
@@ -223,6 +222,102 @@ namespace Data1.DataSeed
                     MinVal = 80,
                     MaxVal = 100,
                     Text = "Liberty seems to be very valued in this case. The lack of it could have right the opposite result and be a demotivator. Offering freedom in work would be valued more than offering more guidance than freedom."
+                }
+
+                ,
+                new TraitEntity
+                {
+                    Id = "facet_assertiveness",
+                    MinVal = 0,
+                    MaxVal = 60,
+                    Text = "not be such a good leader. He is too blunt and he does not know how to offer constructive feedback."
+                },
+                new TraitEntity
+                {
+                    Id = "facet_assertiveness",
+                    MinVal = 60,
+                    MaxVal = 80,
+                    Text = "not be a straight forward leader, might be subjective or need help in order to offer constructive feedback."
+                },
+                new TraitEntity
+                {
+                    Id = "facet_assertiveness",
+                    MinVal = 80,
+                    MaxVal = 100,
+                    Text = "be great at managing sensitive situations with team members, offering constructive feedback and will be objective with team members."
+                }
+
+                ,
+                new TraitEntity
+                {
+                    Id = "facet_self_discipline",
+                    MinVal = 0,
+                    MaxVal = 74,
+                    Text = "The candidate has good discipline and cares about this aspect. Would be a good asset for a leader, but needs some polish."
+                },
+                new TraitEntity
+                {
+                    Id = "facet_self_discipline",
+                    MinVal = 74,
+                    MaxVal = 100,
+                    Text = "The way they speak recommend them as a very disciplined person. This could be a real asset for a leader and it seems to be a very good fit."
+                },
+
+                new TraitEntity
+                {
+                    Id = "need_harmony",
+                    MinVal = 0,
+                    MaxVal = 74,
+                    Text = ""
+                },
+                new TraitEntity
+                {
+                    Id = "need_harmony",
+                    MinVal = 74,
+                    MaxVal = 100,
+                    Text = "The candidate seems to be oriented towards harmony. This is a very important trait that should be present in a team. They could bring some balance to the team."
+                },
+                new TraitEntity
+                {
+                    Id = "facet_self_discipline2",
+                    MinVal = 0,
+                    MaxVal = 60,
+                    Text = "have low self-discipline."
+                },
+                new TraitEntity
+                {
+                    Id = "facet_self_discipline2",
+                    MinVal = 60,
+                    MaxVal = 80,
+                    Text = "need some work on his self-discipline."
+                },
+                new TraitEntity
+                {
+                    Id = "facet_self_discipline2",
+                    MinVal = 80,
+                    MaxVal = 100,
+                    Text = "have a high level of self-discipline."
+                },
+                new TraitEntity
+                {
+                    Id = "facet_self_efficacy",
+                    MinVal = 0,
+                    MaxVal = 60,
+                    Text = "Unfortunately, the results we have identified tell us that {0} has a lot of work to do before becoming effective."
+                },
+                new TraitEntity
+                {
+                    Id = "facet_self_efficacy",
+                    MinVal = 60,
+                    MaxVal = 80,
+                    Text = "{0} seems to fit well here, but does not excel. However, it has the skills."
+                },
+                new TraitEntity
+                {
+                    Id = "facet_self_efficacy",
+                    MinVal = 80,
+                    MaxVal = 100,
+                    Text = "{0} is confident, seems to be in control of the decisions taken and aim for acomplishing things."
                 }
                 //new TraitEntity
                 //{
@@ -274,12 +369,12 @@ namespace Data1.DataSeed
                 },
                 new ParagraphEntity
                 {
-                    ParagraphText = "[name] would [assertiveness]. Apart from this, we run an analysis to check for other skills and how he would integrate in the team. [discipline, harmony, stability]",
+                    ParagraphText = "{0} would {1}. Apart from this, we run an analysis to check for other skills and how he would integrate in the team. {2} {3}",
                     TypeId = ParagraphType.Leadership
                 },
                 new ParagraphEntity
                 {
-                    ParagraphText = "Regarding the likelyhood for [name] to interact with coleagues, it appears to be [gregariousness]. [cooperation]. We have taken a look on how altruist the candidate is and we found rather [altruismStatus] results.",
+                    ParagraphText = "Another important aspect for a new employee is how they manage their time, daily work, how they prioritise it and how good they are at managing other people. Self-discipline refers to the ability to persist at difficult or unpleasant tasks until they are completed. People who possess high self-discipline are able to overcome reluctance to begin tasks and stay on track despite distractions. Those with low self-discipline procrastinate and show poor follow-through, often failing to complete tasks-even tasks they want very much to complete. {0} seems to {1}\nSelf-Efficacy describes confidence in one's ability to accomplish things. High scorers believe they have the intelligence (common sense), drive, and self-control necessary for achieving success. Low scorers do not feel effective, and may have a sense that they are not in control of their lives. {2}",
                     TypeId = ParagraphType.Organisational
                 }
             };

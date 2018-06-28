@@ -8,5 +8,6 @@ namespace Data1.Contracts
     {
         Task<List<TraitDto>> GetTraits();
         Task<ParagraphDto> GetParagraphs(ParagraphType paragraphType);
+        Task<string> GetTraitText(string id, decimal value);
     }
 }
