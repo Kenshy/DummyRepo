@@ -11,9 +11,10 @@ using System;
 namespace Data1.Migrations
 {
     [DbContext(typeof(PersonalityContext))]
-    partial class PersonalityContextModelSnapshot : ModelSnapshot
+    [Migration("20180630160110_CompaniesSeed")]
+    partial class CompaniesSeed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

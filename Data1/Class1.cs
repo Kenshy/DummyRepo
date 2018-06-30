@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
 namespace Data1
@@ -12,11 +14,14 @@ namespace Data1
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<TraitEntity>().HasKey(x => new {x.Id, x.MinVal, x.MaxVal});
+            modelBuilder.Entity<TraitEntity>().HasKey(x => new { x.Id, x.MinVal, x.MaxVal });
         }
 
         public DbSet<TraitEntity> Traits { get; set; }
         public DbSet<ParagraphEntity> Paragraphs { get; set; }
+        public DbSet<CompanyEntity> Companies { get; set; }
+        public DbSet<UserEntity> Users { get; set; }
+        public DbSet<ProfileEntity> Profiles { get; set; }
     }
 
     public class TraitEntity
@@ -34,6 +39,30 @@ namespace Data1
         public int Id { get; set; }
         public string ParagraphText { get; set; }
         public ParagraphType TypeId { get; set; }
+    }
+
+    public class CompanyEntity
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Url { get; set; }
+        public string ShortDescription { get; set; }
+    }
+
+    public class UserEntity
+    {
+        [Key]
+        public string Email { get; set; }
+        public string Name { get; set; }
+        public List<ProfileEntity> Profiles { get; set; }
+    }
+
+    public class ProfileEntity
+    {
+        public string UserId { get; set; }
+        public string CompanyId { get; set; }
+        public string Analysis { get; set; }
+        public UserEntity User { get; set; }
     }
 
     public enum ParagraphType

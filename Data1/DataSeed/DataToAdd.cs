@@ -379,5 +379,40 @@ namespace Data1.DataSeed
                 }
             };
         }
+
+        public static List<CompanyEntity> GetCompanies()
+        {
+            return new List<CompanyEntity>
+            {
+                new CompanyEntity
+                {
+                    Name = "Nasa",
+                    Url = @"D:\Andrei\.NET Projects\DisertationV1\AppApi\wwwroot\NewFolder\Nasa.png",
+                    ShortDescription =
+                        "NASA is led by Administrator Jim Bridenstine, NASA's 13th administrator. Before joining NASA, Bridenstine served in the U.S. Congress, representing Oklahoma’s First Congressional District, serving on the Armed Services Committee and the Science, Space and Technology Committee. Bridenstine’s career in federal service began in the U.S. Navy, flying the E-2C Hawkeye off the USS Abraham Lincoln aircraft carrier."
+                },
+                new CompanyEntity
+                {
+                    Name = "SpaceX",
+                    Url = @"D:\Andrei\.NET Projects\DisertationV1\AppApi\wwwroot\NewFolder\Spacex.png",
+                    ShortDescription =
+                        "SpaceX designs, manufactures and launches advanced rockets and spacecraft. The company was founded in 2002 to revolutionize space technology, with the ultimate goal of enabling people to live on other planets."
+                },
+                new CompanyEntity
+                {
+                    Name = "Jaxa",
+                    Url = @"D:\Andrei\.NET Projects\DisertationV1\AppApi\wwwroot\NewFolder\Jaxa.png",
+                    ShortDescription =
+                        "SpaceX designs, manufactures and launches advanced rockets and spacecraft. The company was founded in 2002 to revolutionize space technology, with the ultimate goal of enabling people to live on other planets."
+                },
+                new CompanyEntity
+                {
+                    Name = "DLR",
+                    Url = @"D:\Andrei\.NET Projects\DisertationV1\AppApi\wwwroot\NewFolder\Dlr.png",
+                    ShortDescription =
+                        "SpaceX designs, manufactures and launches advanced rockets and spacecraft. The company was founded in 2002 to revolutionize space technology, with the ultimate goal of enabling people to live on other planets."
+                }
+            };
+        }
     }
 }

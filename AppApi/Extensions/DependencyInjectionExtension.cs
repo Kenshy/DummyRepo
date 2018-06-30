@@ -25,6 +25,8 @@ namespace AppApi.Extensions
             #region Data
 
             services.AddTransient<ITraitData, TraitData>();
+            services.AddTransient<IInterviewData, InterviewData>();
+
             #endregion
 
             services.Configure<PersonalityOption>(configuration.GetSection("Personality"));

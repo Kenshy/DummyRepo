@@ -19,8 +19,8 @@ namespace AppApi.Extensions.DataSeed
             if (!_context.Traits.Any())
             {
                 _context.Traits.AddRange(DataToAdd.GetTraits());
+                await _context.SaveChangesAsync();
             }
-            await _context.SaveChangesAsync();
         }
 
         private async Task SeedParagraphs()
@@ -28,14 +28,24 @@ namespace AppApi.Extensions.DataSeed
             if (!_context.Paragraphs.Any())
             {
                 _context.Paragraphs.AddRange(DataToAdd.GetParagraphs());
+                await _context.SaveChangesAsync();
             }
-            await _context.SaveChangesAsync();
+        }
+
+        private async Task SeedCompanies()
+        {
+            if (!_context.Companies.Any())
+            {
+                _context.Companies.AddRange(DataToAdd.GetCompanies());
+                await _context.SaveChangesAsync();
+            }
         }
 
         public async Task Seed()
         {
             await SeedTraits();
             await SeedParagraphs();
+            await SeedCompanies();
         }
     }
 }
