@@ -11,8 +11,8 @@ using System;
 namespace Data1.Migrations
 {
     [DbContext(typeof(PersonalityContext))]
-    [Migration("20180630160110_CompaniesSeed")]
-    partial class CompaniesSeed
+    [Migration("20180701192827_changePk")]
+    partial class changePk
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -51,6 +51,22 @@ namespace Data1.Migrations
                     b.ToTable("Paragraphs");
                 });
 
+            modelBuilder.Entity("Data1.ProfileEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Analysis");
+
+                    b.Property<string>("CompanyId");
+
+                    b.Property<string>("UserMail");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Profiles");
+                });
+
             modelBuilder.Entity("Data1.TraitEntity", b =>
                 {
                     b.Property<string>("Id");
@@ -64,6 +80,17 @@ namespace Data1.Migrations
                     b.HasKey("Id", "MinVal", "MaxVal");
 
                     b.ToTable("Traits");
+                });
+
+            modelBuilder.Entity("Data1.UserEntity", b =>
+                {
+                    b.Property<string>("Email");
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Email");
+
+                    b.ToTable("Users");
                 });
 #pragma warning restore 612, 618
         }

@@ -52,17 +52,18 @@ namespace Data1
     public class UserEntity
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public string Email { get; set; }
         public string Name { get; set; }
-        public List<ProfileEntity> Profiles { get; set; }
     }
 
     public class ProfileEntity
     {
-        public string UserId { get; set; }
+        [Key]
+        public int Id { get; set; }
         public string CompanyId { get; set; }
         public string Analysis { get; set; }
-        public UserEntity User { get; set; }
+        public string UserMail { get; set; }
     }
 
     public enum ParagraphType

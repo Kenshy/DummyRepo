@@ -36,10 +36,12 @@ namespace Data1.Services
 
         public async Task AddProfile(string email, string analysis, string company)
         {
-            var profile = new ProfileEntity()
-            profile.UserId = userDataCandidateEmail;
-            profile.CompanyId = company;
-            profile.Analysis = analysis;
+            var profile = new ProfileEntity
+            {
+                UserMail = email,
+                CompanyId = company,
+                Analysis = analysis
+            };
 
             _context.Profiles.Add(profile);
             await _context.SaveChangesAsync();
