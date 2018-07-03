@@ -23,21 +23,9 @@ namespace AppApi.Controllers
         [HttpGet("companies")]
         public async Task<IActionResult> GetCompanies()
         {
-            return Ok(new List<CompanyDto>
-            {
-                new CompanyDto
-                {
-                    CompanyId = 1,
-                    CompanyName = "Company1",
-                    ShortName = "c1"
-                },
-                new CompanyDto
-                {
-                    CompanyId = 2,
-                    CompanyName = "Company2",
-                    ShortName = "c2"
-                }
-            });
+            var companies = await _interviewService.GetCompanies();
+
+            return Ok(companies);
         }
 
         [SwaggerOperation(Tags = new[] { "Interview" })]
@@ -57,12 +45,5 @@ namespace AppApi.Controllers
             await _interviewService.AnalyzeAnswers(request);
             return Accepted();
         }
-    }
-
-    public class CompanyDto
-    {
-        public int CompanyId { get; set; }
-        public string CompanyName { get; set; }
-        public string ShortName { get; set; }
     }
 }

@@ -1,6 +1,6 @@
-﻿namespace BotApp1.Services.Data
+﻿namespace Data1.Dtos
 {
-    public class CompanyDto
+    public class CompanyInfoDto
     {
         public int Id { get; set; }
         public string Name { get; set; }

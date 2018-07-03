@@ -48,19 +48,21 @@ var hasEmail = context.UserData.TryGetValue<string>("Email", out var email);
             var builder = new FormBuilder<InterviewModel>()
                 .Field(new FieldReflector<InterviewModel>(nameof(CompanyName))
                     .SetType(null)
-                    .SetPrompt(new PromptAttribute("Please tell me who do you interview with:{||}")
+                    .SetPrompt(new PromptAttribute("Interviewing with:{||}")
                     {
-                        ChoiceStyle = ChoiceStyleOptions.Buttons
+                        ChoiceStyle = ChoiceStyleOptions.Carousel
                     })
+                    .SetAllowsMultiple(false)
                     .SetDefine(async (state, field) =>
                     {
                         var companies = await GetCompanies();
                         foreach (var company in companies)
+                        {
                             field
-                                .AddDescription(company.CompanyId.ToString(), company.CompanyName)
-                                .AddTerms(company.CompanyId.ToString(), company.CompanyName, company.ShortName);
-
-                        field.Template(TemplateUsage.EnumSelectOne).ChoiceStyle = ChoiceStyleOptions.PerLine;
+                                .AddDescription(company.Id.ToString(), company.Name, company.Url)
+                                .AddTerms(company.Id.ToString(), company.Id.ToString(), company.Name);
+                        }
+                        field.Template(TemplateUsage.EnumSelectOne).ChoiceStyle = ChoiceStyleOptions.Carousel;
                         return true;
                     }))
                 .Field(new FieldReflector<InterviewModel>(nameof(Q1))

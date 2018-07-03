@@ -1,20 +1,33 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using AppApi.Extensions.DataSeed;
+using Data1.Contracts;
+using Data1.Services;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Services;
 using Services.Contracts;
 using Services.Options;
 using Swashbuckle.AspNetCore.Swagger;
 
-namespace AppApi
+namespace AppApi.Extensions
 {
     public static class DependencyInjectionExtension
     {
         public static IServiceCollection DependencyInjectionRegistration(this IServiceCollection services,
             IConfiguration configuration)
         {
+            #region Services
             services.AddTransient<IPersonalityService, PersonalityService>();
             services.AddTransient<ITonalityService, TonalityService>();
             services.AddTransient<IInterviewService, InterviewService>();
+            services.AddTransient<IDataInitializer, DataInitializer>();
+            #endregion
+
+            #region Data
+
+            services.AddTransient<ITraitData, TraitData>();
+            services.AddTransient<IInterviewData, InterviewData>();
+
+            #endregion
 
             services.Configure<PersonalityOption>(configuration.GetSection("Personality"));
             services.Configure<TonalityOption>(configuration.GetSection("Tonality"));
